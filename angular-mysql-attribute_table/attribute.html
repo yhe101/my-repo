@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>rule table</title>
+	<!-- css document -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">	
+
+	<!-- js document -->
+	<script src="js/angular/angular.min.js"></script>
+
+	<style>
+		#ruleForm {
+			margin-top: 50px;
+		}
+
+		#ruleForm .control-label{
+			padding-left: 0px;
+		}
+		#ruleForm .row{
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+
+		#table {
+			margin-top: 30px;
+		}
+		#submit {
+			margin-top: 20px;
+		}
+		#ruleForm select{
+            width: auto;
+		}
+		#ruleForm label {
+			width: 120px;
+		} 
+	</style>
+
+
+</head>
+<body ng-controller="myCtrl">
+	<div class="container" >
+		<h1> Attribute Table</h1>
+			<!-- insert table -->
+		<form class="form-horizontal" id="ruleForm" ng-submit="pushData(frm)" novalidate>
+			<div class="row">
+				<div>
+					<label class="col-xs-6 col-sm-2 control-label">Attribute Name</label>
+					<div class="col-xs-6 col-sm-2">
+						<input type="text" class="form-control" ng-model="frm.name" required>                       
+					</div>
+				</div>
+				<div >
+					<label  class="col-xs-6 col-sm-1 control-label">Type</label>
+					<select  class="form-control col-xs-6 col-sm-2" ng-model="frm.type" required>
+						 <option value="Name">Name</option>   
+						 <option value="ID">ID</option> 
+						 <option value="Address">Address</option>       
+						 <option value="Date">Date</option>              
+					</select>
+				</div>
+				<div >
+					<label class="col-sm-1 col-xs-6 control-label">Unique</label>
+					<div class="col-xs-6 col-sm-1 checkbox ">
+						<input type="checkbox"  ng-model="frm.uniqueness" ng-true-value="'Yes'" ng-false-value="'No'">                  
+					</div>
+				</div>
+				<div >
+					<label class="col-sm-1 col-xs-6 control-label">Weight</label>
+					<div class="col-xs-6 col-sm-1 ">
+						<input type="text" class="form-control" ng-model="frm.weight" required>                       
+					</div>
+				</div>
+		
+			<div class="form-group">
+			   <div class="col-xs-6 col-sm-2">
+				  <button  class="btn btn-primary">Insert</button>
+			   </div>
+		   </div>	 
+		   	</div>	     
+		</form>
+
+		<div class="container" id="table" >
+			<table class="table table-striped" >
+				<tr>
+					<th>Attribute Id</th><th>Attribute Name</th><th>Attribute Type</th><th>Uniqueness</th><th>Weight</th><th>Remove</th>
+				</tr>
+				<tr ng-repeat="item in attribute | filter: query">
+					<td>{{item.attribute_id}}</td><td>{{ item.attribute_name }}</td><td>{{ item.attribute_type }}</td><td>{{ item.uniqueness }}</td><td>{{ item.weight}}</td><td><button class="btn btn-danger" ng-click="removeData(item.attribute_id)">x</button></td>
+				</tr>
+			</table>
+		</div>	
+
+
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap/bootstrap.min.js"></script>
+		<script src="js/controller.js"></script>
+
+	</body>
+	</html>
+
